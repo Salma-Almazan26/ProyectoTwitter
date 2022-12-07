@@ -18,20 +18,19 @@ function Reset() {
   return (
     <div className="reset">
       <div className="reset__container">
+        <h1 className="titulo">Encuentra tu cuenta de ADISA</h1>
+        <h4 className="Contexto">Introduce tu correo electronico</h4>
         <input
           type="text"
           className="reset__textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
+          placeholder="Correo Electronico"
         />
         <button className="reset__btn" onClick={() => sendPasswordReset(email)}>
-          Send password reset email
+          Recuperar
         </button>
 
-        <div>
-          Don't have an account? <Link to="/register">Register</Link> now.
-        </div>
       </div>
     </div>
   );
