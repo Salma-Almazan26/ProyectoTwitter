@@ -1,33 +1,88 @@
 .login {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
+    background-color: #051221;
     align-items: center;
     justify-content: center;
+    
   }
   .login__container {
+    margin-top: 0px;
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-color: #dcdcdc;
-    padding: 30px;
+    border-radius:10px 10px 10px;
+    padding: 90px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: rgba(0, 0, 0, 0.349);
   }
   .login__textBox {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
+    border-radius: 60px 60px 60px 60px;
   }
   .login__btn {
     padding: 10px;
     font-size: 18px;
     margin-bottom: 10px;
     border: none;
-    color: white;
-    background-color: black;
+    color: #051221;
+    background-color: #FFD966;
+    border-radius: 60px 60px 60px 60px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   }
   .login__google {
-    background-color: #4285f4;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    background-color: #E5E3E5;
+    color: #051221;
+    border-radius: 60px 60px 60px 60px;
   }
-  .login div {
-    margin-top: 7px;
+  .titulo{
+    color: #E5E3E5;
+    font-size: 29px;
+  }
+  footer{
+    background-color: #FFD966;
+    width:100%;
+    height: 65px;
+  }
+  .btn-extra{
+    float: right;
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 150px;
+    border: none;
+    color: #051221 ;
+    text-decoration: none;
+    border-radius: 60px 60px 60px 60px;
+    border: 2px solid #051221;
+    text-align: center;
+  }
+  .blanco{
+    color: #E5E3E5;
+    font-weight: 150;
+  }
+  .barra{
+    height: 2px;
+    width: 100%;
+    background-color: #E5E3E5;
+    border-radius: 60px 60px 60px 60px;
+  }
+  .btn_2{
+    padding: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #E5E3E5;
+    border: 2px solid #E5E3E5;
+    border-radius: 60px 60px 60px 60px;
+    text-decoration: none;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  }
+  .logo{
+    width: 50px;
+    height: 50px;
+    align-self: center;
   }
