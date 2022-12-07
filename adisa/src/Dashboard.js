@@ -5,6 +5,9 @@ import "./Dashboard.css";
 import { auth, db, logout } from "./firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
@@ -37,7 +40,7 @@ function Dashboard() {
         <div>{name}</div>
         <div>{user?.email}</div>
         <button className="dashboard__btn" onClick={logout}>
-          Logout
+          <FontAwesomeIcon icon={icon({name: 'kiwi-bird', style: 'solid'})}/>
         </button>
       </div>
     </div>
