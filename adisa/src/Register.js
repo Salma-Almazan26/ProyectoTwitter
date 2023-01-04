@@ -7,6 +7,7 @@ import {
   signInWithGoogle,
 } from "./firebase";
 import "./Register.css";
+import image from "./imagenes/kiwi.png";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +25,9 @@ function Register() {
   return (
     <div className="register">
       <div className="register__container">
+      <img src={image} className="logo"></img>
+        <h1 className="titulo">Registar en ADISA.</h1>
+        <h5 className="barra"> </h5>
         <input
           type="text"
           className="register__textBox"
@@ -54,9 +58,9 @@ function Register() {
         >
           Register with Google
         </button>
-        <div>
-          Already have an account? <Link to="/">Login</Link> now.
-        </div>
+
+        <a href="/" className="login_btn">Login</a>
+       
       </div>
     </div>
   );
