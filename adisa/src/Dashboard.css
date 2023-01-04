@@ -2,16 +2,31 @@
     height: 100vh;
     width: 100vw;
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
-  .dashboard__container {
+
+  .dashboard__container_left{
+    background-color: #051221;
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: #213145 solid 1px;
+  }
+
+  .dashboard__container_center {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-color: #dcdcdc;
-    padding: 30px;
+    background-color: #051221;
+    width: 50%;
   }
+
+  .dashboard__container_right{
+    background-color: #051221;
+    width: 35%;
+    border-left: #213145 solid 1px;
+  }
+
   .dashboard__btn {
     padding: 10px;
     font-size: 18px;
@@ -22,4 +37,209 @@
   }
   .dashboard div {
     margin-top: 7px;
+  }
+
+  .logo{
+    width: 35px;
+    height: 35px;
+  }
+
+  .left-option{
+    width: 70px;
+    height: 70px;
+    color: #E5E3E5;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .left-option:hover{
+    background-color: #111e2d;
+    
+  }
+
+  .left-icon{
+    width: 35px;
+    height: 35px;
+  }
+
+  .container-post{
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+  }
+
+  .new-post{
+    width: 45px;
+    height: 45px;
+  }
+
+  .search-tool input{
+    background-color: #111e2d;
+    border: none;
+    width: 80%;
+    height: 50px;
+    border-radius: 30px;
+    padding-left: 15px;
+    margin-top: 20px;
+    color: #E5E3E5;
+    font-size: 15px;
+    margin-left: 10%;
+  }
+
+  .search-tool button{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: 4%;
+    top: 4%;
+    background-color: transparent;
+    border: none;
+    color: #E5E3E5;
+  }
+
+  .search-button{
+    font-size: 20px;
+  }
+
+  .news-tweets{
+    background-color:#111e2d;
+    margin-left: 10%;
+    width: 83%;
+    border-radius: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .news-tweets h3{
+    margin: 15px
+  }
+
+  .news-tweets h4, p, h3{
+    display: block;
+    margin: 0px;
+    color: #E5E3E5;
+  }
+
+  .news-tweets h4{
+    font-size: 20px;
+  }
+
+  .news-tweets p{
+    font-size: 15px;
+  }
+
+  .new{
+    position: relative;
+    padding: 10px 0px;
+    width: 97%;
+    padding-left: 15px;
+  }
+  .new p{
+    color: #a9a8aa;
+  }
+
+  .new:hover{
+    background-color: #213145;
+  }
+
+  .dots-more{
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    color: #E5E3E5;
+  }
+
+  .new-publication{
+    width: 100%;
+    border-bottom: #213145 solid 1px;
+    padding-bottom: 15px;
+  }
+
+  .new-publication h2{
+    text-align: left;
+    margin: 20px 0 35px 10px;
+    color: #E5E3E5;
+  }
+
+  .publication-data{
+    margin: 0;
+    display: flex;
+  }
+
+  .profile-image{
+    width: 70px;
+    height: 70px;
+    background-color: #213145;
+    margin: 0px 0 0 10px;
+    border-radius: 35px;
+  }
+
+
+  .publication-data input{
+    height: 70px;
+    padding: 0;
+    width: 80%;
+    margin-left: 20px;
+    padding-left: 15px;
+    background-color: transparent;
+    border: transparent;
+    color: #E5E3E5;
+    font-size: 25px;
+  }
+
+  .publication-data input:focus{
+    border: solid 0px;
+  }
+
+  .buttons-publication{
+    display:flex;
+    gap: 2%;
+    position: relative;
+    padding: 5px;
+  }
+
+  .publication-option{
+    width: 40px;
+    height: 40px;
+    border-radius: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .publication-option:hover{
+    background-color: #213145;
+    cursor: pointer;
+  }
+
+  .tweet{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    height: 60%;
+    width: 20%;
+    border-radius: 20px;
+    background-color: #FEDA66;
+    border: none;
+    color: #111e2d;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .tweet:hover{
+    cursor: pointer;
+    background-color: #bda24a;
+  }
+
+  hr{
+    border-style: solid;
+    border: #213145 solid 0.2px;
+    margin-top: 5%;
+  }
+
+  .publication-icon{
+    font-size: 20px;
+    color: #FEDA66;
   }
