@@ -19,13 +19,14 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyAXJ3a2T4ZplSeJWD4lZqyUKWp-K7Xk-ko",
-    authDomain: "practica-firebase-01.firebaseapp.com",
-    projectId: "practica-firebase-01",
-    storageBucket: "practica-firebase-01.appspot.com",
-    messagingSenderId: "944620341911",
-    appId: "1:944620341911:web:30966a5b2ac0140f5477d2"
-  };
+  apiKey: "AIzaSyA1Ql9C2CKjbg3pqonOKp3DxxDBimhuVB4",
+  authDomain: "proyecto-adisa.firebaseapp.com",
+  projectId: "proyecto-adisa",
+  storageBucket: "proyecto-adisa.appspot.com",
+  messagingSenderId: "216766436283",
+  appId: "1:216766436283:web:ec071ef93863faae322a9e",
+  measurementId: "G-VT7B6L2E6M"
+};
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -92,6 +93,11 @@ const logout = () => {
   signOut(auth);
 };
 
+const saveTweet = (tweet) => {
+  console.log("me enviaste " + tweet)
+  addDoc(collection(db, "tweets"), { tweet });
+}
+
 export {
   auth,
   db,
@@ -101,4 +107,5 @@ export {
   signInWithEmailAndPassword,
   sendPasswordReset,
   logout,
+  saveTweet
 };

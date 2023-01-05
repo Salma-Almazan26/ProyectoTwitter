@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-import { auth, db, logout } from "./firebase";
+import { auth, db, logout, saveTweet } from "./firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -19,10 +19,12 @@ import logo from './imagenes/kiwi.png'
  * @
  */
 
+
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  var tweet = "";
 
   const fetchUserName = async () => {
     try {
@@ -44,6 +46,17 @@ function Dashboard() {
     fetchUserName();
   }, [user, loading]);
 
+  const handleChange = (e) => {
+    tweet = e.target.value; 
+    console.log(tweet);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    saveTweet(tweet);
+    e.target.reset();
+  }
+
   return (
     <div className="dashboard">
       <div className = "dashboard__container_left ">
@@ -59,11 +72,11 @@ function Dashboard() {
       </div>
       <div className="dashboard__container_center">
 
-        <div className="new-publication">
+        <form className="new-publication" onSubmit={handleSubmit}>
           <h2>Home</h2>
           <div className="publication-data">
             <div className="profile-image"></div>
-            <input type="text" name="text-publication" placeholder="What's happening"/>
+            <input type="text" name="text-publication" onChange={handleChange} placeholder="What's happening"/>
           </div>
           <hr></hr>
           <div className="buttons-publication">
@@ -74,9 +87,9 @@ function Dashboard() {
             <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'calendar-days', style: 'solid'})} className="publication-icon"/> </div>
             <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'location-dot', style: 'solid'})} className="publication-icon"/> </div>
            
-            <button type="submit" className="tweet">Tweet</button>
+            <button className="tweet">Tweet</button>
           </div>
-        </div>
+        </form>
 
       </div>
       <div className="dashboard__container_right">
