@@ -3,7 +3,7 @@ import { auth, db, saveTweet, onSnapshot} from "./firebase";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
-function Form() {
+function Form({userName}) {
     const datoInicial = {
         mensaje: ""
     }
@@ -30,7 +30,7 @@ function Form() {
   return (
     <div>
         <form className="new-publication" onSubmit={publicarMensaje}>
-            <h2>Home</h2>
+            <h2>Hello, {userName}</h2>
             <div className="publication-data">
                 <div className="profile-image"></div>
                 <textarea type="text" name='tweet' placeholder="What's happening" onChange={nuevoMensaje}/>

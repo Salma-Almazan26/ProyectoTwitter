@@ -94,7 +94,7 @@ function Dashboard() {
       <div className="dashboard__container_center">
       
       <div>
-        <Form/>
+        <Form userName={name}/>
       </div>
 
       <div>
