@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
-import { auth, db, logout, saveTweet } from "./firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
-
+import { auth, db, onSnapshot} from "./firebase";
+import { query, collection, getDocs, where, loadBundle, connectFirestoreEmulator} from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 import logo from './imagenes/kiwi.png'
+import { async } from "@firebase/util";
+import Form from "./Form"
 
 /**
  *        Logged in as
@@ -16,13 +17,25 @@ import logo from './imagenes/kiwi.png'
         <button className="dashboard__btn" onClick={logout}>
           <FontAwesomeIcon icon={icon({name: 'kiwi-bird', style: 'solid'})}/>
         </button> 
+
+
+                <div className="tweets-container">
+          {
+            tweetsArray.map(oneTweet => (
+              <div>
+                {oneTweet.data().tweet}
+              </div>
+            ))  
+          }
+          
+        </div>
  * @
  */
-
 
 function Dashboard() {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [pubs, setPubs] = useState([]);
   const navigate = useNavigate();
   var tweet = "";
 
@@ -39,23 +52,31 @@ function Dashboard() {
     }
   };
 
+  const getTweets = async () => {
+    const q = query(collection(db, "tweets"))
+    const changes = onSnapshot(q, (querySnapshot) => {
+      var myTweets = [];
+      querySnapshot.forEach( (doc) => {
+        myTweets.push({...doc.data(), id: doc.id})
+      })
+      setPubs(myTweets)
+      console.log(myTweets)
+    })
+  }
+
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
-
+    console.log('getting data')
     fetchUserName();
+    getTweets();
+    console.log(name)
+    
   }, [user, loading]);
 
-  const handleChange = (e) => {
-    tweet = e.target.value; 
-    console.log(tweet);
-  }
+  
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    saveTweet(tweet);
-    e.target.reset();
-  }
+
 
   return (
     <div className="dashboard">
@@ -67,29 +88,22 @@ function Dashboard() {
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'envelope', style: 'solid'})} className="left-icon" /> </div>
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'user', style: 'solid'})} className="left-icon" /> </div>
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'ellipsis', style: 'solid'})} className="left-icon" /> </div>
-          <div className="left-option container-post"> <FontAwesomeIcon icon={icon({name: 'feather-pointed', style: 'solid'})} className="left-icon new-post" /> </div>
+          <div className="left-option container-post"> <FontAwesomeIcon icon={icon({name: 'right-from-bracket', style: 'solid'})} className="left-icon new-post" /> </div>
           <div className="left-option profile-icon"></div>
       </div>
       <div className="dashboard__container_center">
+      
+      <div>
+        <Form/>
+      </div>
 
-        <form className="new-publication" onSubmit={handleSubmit}>
-          <h2>Home</h2>
-          <div className="publication-data">
-            <div className="profile-image"></div>
-            <input type="text" name="text-publication" onChange={handleChange} placeholder="What's happening"/>
-          </div>
-          <hr></hr>
-          <div className="buttons-publication">
-            <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'image', style: 'solid'})} className="publication-icon"/> </div>
-            <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'camera', style: 'solid'})} className="publication-icon"/> </div>
-            <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'list-ul', style: 'solid'})} className="publication-icon"/> </div>
-            <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'face-laugh-wink', style: 'solid'})} className="publication-icon"/> </div>
-            <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'calendar-days', style: 'solid'})} className="publication-icon"/> </div>
-            <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'location-dot', style: 'solid'})} className="publication-icon"/> </div>
-           
-            <button className="tweet">Tweet</button>
-          </div>
-        </form>
+      <div>
+        {
+          pubs.map(publication => (
+            <div className="new-tweet" key={publication.id}>{publication.tweet}</div>
+          ))
+        }
+      </div>
 
       </div>
       <div className="dashboard__container_right">
