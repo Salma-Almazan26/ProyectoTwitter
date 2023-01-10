@@ -5,14 +5,15 @@ import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // 
 
 function Form({userName}) {
     const datoInicial = {
-        mensaje: ""
+        mensaje: "",
+        usuario: ""
     }
 
     const [twitters, setTwitters] = useState(datoInicial);
 
     const nuevoMensaje = (a) => {
         const {name, value} = a.target;
-        setTwitters({[name]: value}) 
+        setTwitters({[name]: value, persona: userName}) 
     }
 
     const comprueba = () => {
