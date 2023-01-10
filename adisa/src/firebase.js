@@ -15,6 +15,9 @@ import {
   collection,
   where,
   addDoc,
+  onSnapshot,
+  doc,
+  getDoc
 } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -31,6 +34,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const allTweets = [];
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -93,9 +97,21 @@ const logout = () => {
   signOut(auth);
 };
 
-const saveTweet = (tweet) => {
-  console.log("me enviaste " + tweet)
-  addDoc(collection(db, "tweets"), { tweet });
+const saveTweet = async (objectTweet) => {
+  await addDoc(collection(db, "tweets"), objectTweet );
+}
+
+const getTweets = async () => {
+  const q = query(collection(db, "tweets"))
+  const changes = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach( (doc) => {
+      allTweets.push({...doc.data(), id: doc.id})
+    })
+  })
+}
+
+const onGetTweets = (callback) => {
+  return onSnapshot(collection(db, 'tweets'), callback)
 }
 
 export {
@@ -107,5 +123,10 @@ export {
   signInWithEmailAndPassword,
   sendPasswordReset,
   logout,
-  saveTweet
+  saveTweet,
+  getTweets,
+  onGetTweets,
+  addDoc,
+  allTweets,
+  onSnapshot
 };
