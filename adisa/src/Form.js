@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
 import { auth, db, saveTweet, onSnapshot} from "./firebase";
+import { serverTimestamp } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 
 function Form({userName}) {
     const datoInicial = {
         mensaje: "",
-        usuario: ""
+        usuario: "",
+        fecha:""
     }
 
     const [twitters, setTwitters] = useState(datoInicial);
 
     const nuevoMensaje = (a) => {
         const {name, value} = a.target;
-        setTwitters({[name]: value, persona: userName}) 
+        setTwitters({[name]: value, persona: userName, fecha: serverTimestamp()}) 
     }
 
     const comprueba = () => {
-        console.log(twitters)
+        console.log(twitters["fecha"])
     }
 
     const publicarMensaje = (a) => {

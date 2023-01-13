@@ -37,7 +37,7 @@ function Dashboard() {
   const [name, setName] = useState("");
   const [pubs, setPubs] = useState([]);
   const navigate = useNavigate();
-  var tweet = "";
+  var DDMMAA = "";
 
   const fetchUserName = async () => {
     try {
@@ -57,7 +57,16 @@ function Dashboard() {
     const changes = onSnapshot(q, (querySnapshot) => {
       var myTweets = [];
       querySnapshot.forEach( (doc) => {
-        myTweets.push({...doc.data(), id: doc.id})
+        DDMMAA = (doc.data().fecha["seconds"]*1000000000) + ( doc.data().fecha["nanoseconds"] )
+        DDMMAA *= 0.000001
+        var myDDMMAA = new Date(DDMMAA)
+        myTweets.push({...doc.data(), 
+        id: doc.id, 
+        dia: myDDMMAA.getDate(),
+        mes: myDDMMAA.getMonth() + 1,
+        anio: myDDMMAA.getFullYear(),
+        hora: myDDMMAA.getHours(),
+        minuto: myDDMMAA.getMinutes()})
       })
       setPubs(myTweets)
       console.log(myTweets)
@@ -70,7 +79,6 @@ function Dashboard() {
     console.log('getting data')
     fetchUserName();
     getTweets();
-    console.log(name)
     
   }, [user, loading]);
 
@@ -88,7 +96,7 @@ function Dashboard() {
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'envelope', style: 'solid'})} className="left-icon" /> </div>
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'user', style: 'solid'})} className="left-icon" /> </div>
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'ellipsis', style: 'solid'})} className="left-icon" /> </div>
-          <div className="left-option container-post" onClick={logout}> <FontAwesomeIcon icon={icon({name: 'right-from-bracket', style: 'solid'})} className="left-icon new-post" /> </div>
+          <div className="left-option logout-button" onClick={logout}> <FontAwesomeIcon icon={icon({name: 'right-from-bracket', style: 'solid'})} className="left-icon new-post" /> </div>
           <div className="left-option profile-icon"></div>
       </div>
       <div className="dashboard__container_center">
@@ -99,8 +107,28 @@ function Dashboard() {
 
       <div>
         {
+          
           pubs.map(publication => (
-            <div className="new-tweet" key={publication.id}>{publication.tweet}</div>
+            <div className="new-tweet" key={publication.id}>
+              <div className="data-message-user_new-tweet">
+                <div className="profile-photo_new-tweet">
+                  <FontAwesomeIcon icon={icon({name: 'user', style: 'solid'})} className="left-icon" />
+                </div>
+                <div className="publication-area_new-tweet">
+                  <div className="publication-data_new-tweet">
+                    <div>{publication.persona}</div>
+                    <div className="dot_new-tweet"><FontAwesomeIcon icon={icon({name: 'circle', style: 'solid'})} className="icon_new-tweet dot less-important" /></div>
+                    <div className="less-important">{publication.dia}/{publication.mes}/{publication.anio}</div>
+                    <div className="less-important">{publication.hora}:{publication.minuto}</div>
+                  </div>
+              
+                <div className="message_new-tweet">
+                  <p>{publication.tweet}</p> 
+                </div>
+                </div>
+              </div>
+              <div className="actions_bar-new-tweet">...</div>
+            </div>
           ))
         }
       </div>
