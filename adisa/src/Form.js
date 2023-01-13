@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import { auth, db, saveTweet, onSnapshot} from "./firebase";
+import { auth, db, saveTweet, onSnapshot, uploadFile} from "./firebase";
 import { serverTimestamp } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
+import InputUploadImages from "./InputUploadImages"
 
 function Form({userName}) {
     const datoInicial = {
         mensaje: "",
         usuario: "",
-        fecha:""
+        fecha:"",
+        imagen:""
     }
 
+    var archivo = "";
     const [twitters, setTwitters] = useState(datoInicial);
 
     const nuevoMensaje = (a) => {
@@ -18,16 +21,32 @@ function Form({userName}) {
         setTwitters({[name]: value, persona: userName, fecha: serverTimestamp()}) 
     }
 
+    const guardaRutaImg = (e) => {
+        archivo = e.target.files[0]
+        alert("Imagen seleccionada con éxito")
+    }
+
     const comprueba = () => {
         console.log(twitters["fecha"])
     }
 
-    const publicarMensaje = (a) => {
+    const publicarMensaje = async (a) => {
+        
         a.preventDefault();
-        saveTweet(twitters);
+        var URL = ""
+        try {
+            if(archivo != ""){
+                URL = await uploadFile(archivo);
+            }
+        } catch (error) {
+            console.log(error)  
+        }
+
+        var copiaTwitters = {...twitters, imagen: URL}
+        saveTweet(copiaTwitters);
         setTwitters({...datoInicial});
         a.target.reset();
-        
+        archivo = ""
     }
 
   return (
@@ -42,7 +61,11 @@ function Form({userName}) {
             <hr />
 
             <div className="buttons-publication">
-                <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'image', style: 'solid'})} className="publication-icon"/> </div>
+
+                <div className='uploading-File'>
+                    <label htmlFor="subeArchivo"><FontAwesomeIcon icon={icon({name: 'image', style: 'solid'})} className="publication-icon"/></label>
+                    <input id='subeArchivo' type="file" className="publication-option-button" onChange={guardaRutaImg}/>
+                </div>
                 <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'camera', style: 'solid'})} className="publication-icon"/> </div>
                 <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'list-ul', style: 'solid'})} className="publication-icon"/> </div>
                 <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'face-laugh-wink', style: 'solid'})} className="publication-icon"/> </div>

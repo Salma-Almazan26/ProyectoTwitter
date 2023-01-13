@@ -122,9 +122,10 @@ function Dashboard() {
                     <div className="less-important">{publication.hora}:{publication.minuto}</div>
                   </div>
               
-                <div className="message_new-tweet">
-                  <p>{publication.tweet}</p> 
-                </div>
+                  <div className="message_new-tweet">
+                    <p>{publication.tweet}</p>
+                  </div>
+                  <img src={publication.imagen} alt="" width={150}/>
                 </div>
               </div>
               <div className="actions_bar-new-tweet">...</div>

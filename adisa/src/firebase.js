@@ -20,6 +20,9 @@ import {
   getDoc
 } from "firebase/firestore";
 
+import {getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage"
+import {v4} from "uuid"
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA1Ql9C2CKjbg3pqonOKp3DxxDBimhuVB4",
@@ -34,6 +37,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app)
 const allTweets = [];
 
 const googleProvider = new GoogleAuthProvider();
@@ -114,6 +118,13 @@ const onGetTweets = (callback) => {
   return onSnapshot(collection(db, 'tweets'), callback)
 }
 
+async function uploadFile(file) {
+  const storageRef = ref(storage, v4())
+  await uploadBytes(storageRef, file)
+  const url = await getDownloadURL(storageRef)
+  return url
+}
+
 export {
   auth,
   db,
@@ -128,5 +139,7 @@ export {
   onGetTweets,
   addDoc,
   allTweets,
-  onSnapshot
+  onSnapshot,
+  storage,
+  uploadFile
 };
