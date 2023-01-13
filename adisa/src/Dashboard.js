@@ -110,13 +110,13 @@ function Dashboard() {
           
           pubs.map(publication => (
             <div className="new-tweet" key={publication.id}>
-              <div className="data-message-user_new-tweet">
-                <div className="profile-photo_new-tweet">
+                              <div className="profile-photo_new-tweet">
                   <FontAwesomeIcon icon={icon({name: 'user', style: 'solid'})} className="left-icon" />
                 </div>
+              <div className="data-message-user_new-tweet">
                 <div className="publication-area_new-tweet">
                   <div className="publication-data_new-tweet">
-                    <div>{publication.persona}</div>
+                    <div className="author_new-tweet">{publication.persona}</div>
                     <div className="dot_new-tweet"><FontAwesomeIcon icon={icon({name: 'circle', style: 'solid'})} className="icon_new-tweet dot less-important" /></div>
                     <div className="less-important">{publication.dia}/{publication.mes}/{publication.anio}</div>
                     <div className="less-important">{publication.hora}:{publication.minuto}</div>
@@ -125,10 +125,11 @@ function Dashboard() {
                   <div className="message_new-tweet">
                     <p>{publication.tweet}</p>
                   </div>
-                  <img src={publication.imagen} alt="" width={150}/>
+                  <img src={publication.imagen} alt="" className="img-author_new-tweet"/>
+
+                  <div className="actions_bar-new-tweet">...</div>
                 </div>
               </div>
-              <div className="actions_bar-new-tweet">...</div>
             </div>
           ))
         }
