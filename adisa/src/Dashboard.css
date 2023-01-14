@@ -351,3 +351,19 @@
     font-size: 20px;
     font-weight: bold;
   }
+
+  @media screen and (max-width: 1290px){
+    .dashboard__container_right{
+      display: none;
+    }
+
+    .dashboard__container_left{
+      display:none;
+    }
+
+    .dashboard__container_center{
+      width: 100%;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  }
