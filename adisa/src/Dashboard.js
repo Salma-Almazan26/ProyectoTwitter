@@ -127,7 +127,13 @@ function Dashboard() {
                   </div>
                   <img src={publication.imagen} alt="" className="img-author_new-tweet"/>
 
-                  <div className="actions_bar-new-tweet">...</div>
+                  <div className="actions-bar_new-tweet">
+                    <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'chart-simple', style: 'solid'})} className="publication-icon tweet-option"/> </div>
+                    <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'comment', style: 'solid'})} className="publication-icon tweet-option"/> </div>
+                    <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'retweet', style: 'solid'})} className="publication-icon tweet-option"/> </div>
+                    <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'heart', style: 'solid'})} className="publication-icon tweet-option"/> </div>
+                    <div className="publication-option"> <FontAwesomeIcon icon={icon({name: 'arrow-up-from-bracket', style: 'solid'})} className="publication-icon tweet-option"/> </div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -97,8 +97,8 @@
     height: 50px;
     width: 50px;
     position: absolute;
-    right: 4%;
-    top: 4%;
+    right: 2%;
+    top: 4.5%;
     background-color: transparent;
     border: none;
     color: #E5E3E5;
@@ -336,4 +336,18 @@
   .img-author_new-tweet{
     margin-top: 2%;
     width: 90%;
+  }
+
+  .actions-bar_new-tweet{
+    display: flex;
+    gap: 2%;
+  }
+
+  .tweet-option{
+    color: #a9a8aa;
+  }
+
+  .author_new-tweet, .less-important{
+    font-size: 20px;
+    font-weight: bold;
   }
