@@ -25,13 +25,12 @@ import {v4} from "uuid"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA1Ql9C2CKjbg3pqonOKp3DxxDBimhuVB4",
-  authDomain: "proyecto-adisa.firebaseapp.com",
-  projectId: "proyecto-adisa",
-  storageBucket: "proyecto-adisa.appspot.com",
-  messagingSenderId: "216766436283",
-  appId: "1:216766436283:web:ec071ef93863faae322a9e",
-  measurementId: "G-VT7B6L2E6M"
+  apiKey: "AIzaSyAl-CvVar-4A5p62B9jaLwYhcj1PE-nsXo",
+  authDomain: "proyecto-adisa-53be8.firebaseapp.com",
+  projectId: "proyecto-adisa-53be8",
+  storageBucket: "proyecto-adisa-53be8.appspot.com",
+  messagingSenderId: "416071443391",
+  appId: "1:416071443391:web:96f938d24fbdc5f131770a"
 };
 
 const app = initializeApp(firebaseConfig);

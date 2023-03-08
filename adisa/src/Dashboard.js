@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import { auth, db, onSnapshot, logout} from "./firebase";
-import { query, collection, getDocs, where, loadBundle, connectFirestoreEmulator} from "firebase/firestore";
+import { query, collection, getDocs, where, loadBundle, connectFirestoreEmulator, orderBy} from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { solid, icon } from '@fortawesome/fontawesome-svg-core/import.macro' // <-- import styles to be used
 import logo from './imagenes/kiwi.png'
@@ -53,7 +53,7 @@ function Dashboard() {
   };
 
   const getTweets = async () => {
-    const q = query(collection(db, "tweets"))
+    const q = query(collection(db, "tweets"), orderBy("fecha", "desc"))
     const changes = onSnapshot(q, (querySnapshot) => {
       var myTweets = [];
       querySnapshot.forEach( (doc) => {
@@ -96,7 +96,7 @@ function Dashboard() {
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'envelope', style: 'solid'})} className="left-icon" /> </div>
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'user', style: 'solid'})} className="left-icon" /> </div>
           <div className="left-option"> <FontAwesomeIcon icon={icon({name: 'ellipsis', style: 'solid'})} className="left-icon" /> </div>
-          <div className="left-option logout-button" onClick={logout}> <FontAwesomeIcon icon={icon({name: 'right-from-bracket', style: 'solid'})} className="left-icon new-post" /> </div>
+          <div className="left-option logout-button" onClick={logout}> <FontAwesomeIcon icon={icon({name: 'right-from-bracket', style: 'solid'})} className="left-icon logout-icon" /> </div>
           <div className="left-option profile-icon"></div>
       </div>
       <div className="dashboard__container_center">
